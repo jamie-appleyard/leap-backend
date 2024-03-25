@@ -1,0 +1,20 @@
+#Fast API library
+fastapi
+
+#Uvicorn for server rendering
+uvicorn
+
+#Pymongo is the driver between python and mongoDB
+pymongo
+
+#Allows for tbe creation of a env file to safely store environment variables
+environs
+
+#Should be a dependency of Fast API anyway, but allows us to define models for the DB and to utilise some validation
+pydantic
+
+#Allows for the validation of email addresses, dependency of pydantic
+email-validator
+
+#Similar to pymongo excpet that allows for asynchronous communications with the server
+motor
