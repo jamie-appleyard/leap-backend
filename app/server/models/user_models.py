@@ -17,6 +17,10 @@ class UserSchema(BaseModel):
             'user_ponds' : []
         }
 
+class UpdateUserModel(BaseModel):
+    username: Optional[str]
+    email: Optional[EmailStr]
+
 def ResponseModel(data, message): #Lift up to parent and import DRY
     return {
         "data": [data],
