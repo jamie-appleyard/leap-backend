@@ -1,10 +1,9 @@
 from fastapi import FastAPI
 
-from server.routes.user_routes import router as UserRouter
-
-from server.routes.topic_routes import router as TopicRouter
-from server.routes.comment_routes import router as CommentRouter
-from server.routes.post_routes import router as PostRouter
+from .routes.user_routes import router as UserRouter
+from .routes.topic_routes import router as TopicRouter
+from .routes.comment_routes import router as CommentRouter
+from .routes.post_routes import router as PostRouter
 
 app = FastAPI()
 
