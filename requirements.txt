@@ -18,3 +18,9 @@ email-validator
 
 #Similar to pymongo excpet that allows for asynchronous communications with the server
 motor
+
+#Allows for test server
+httpx
+
+#Testing library for python
+pytest
