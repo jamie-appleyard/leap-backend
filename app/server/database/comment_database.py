@@ -22,3 +22,10 @@ async def add_comment(comment_data : dict):
     comment = await comment_col.insert_one(comment_data) #also insert_many()
     new_comment = await comment_col.find_one({'_id' : comment.inserted_id})
     return comment_helper(new_comment)
+
+#Delete a comment by id
+async def delete_comment(id: str):
+    comment = await comment_col.find_one({'_id': ObjectId(id)})
+    if comment:
+        await comment_col.delete_one({'_id': ObjectId(id)})
+        return True
