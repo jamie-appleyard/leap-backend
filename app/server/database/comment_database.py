@@ -29,3 +29,28 @@ async def retrieve_comment(id : str):
     comment = await comment_col.find_one({'_id' : ObjectId(id)})
     if comment:
         return comment_helper(comment)
+
+async def update_comment(id: str, data: dict):
+    if len(data) < 1:
+        return False
+    comment = await comment_col.find_one({"_id": ObjectId(id)})
+    if comment:
+        updated_comment = await comment_col.update_one(
+            {"_id": ObjectId(id)}, {"$set": data}
+        )
+        if updated_comment:
+            return True
+        return False
+
+#Add a new comment
+async def add_comment(comment_data : dict):
+    comment = await comment_col.insert_one(comment_data) #also insert_many()
+    new_comment = await comment_col.find_one({'_id' : comment.inserted_id})
+    return comment_helper(new_comment)
+
+#Delete a comment by id
+async def delete_comment(id: str):
+    comment = await comment_col.find_one({'_id': ObjectId(id)})
+    if comment:
+        await comment_col.delete_one({'_id': ObjectId(id)})
+        return True

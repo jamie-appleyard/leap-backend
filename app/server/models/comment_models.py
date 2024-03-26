@@ -13,6 +13,11 @@ class CommentSchema(BaseModel):
             'votes': 0
         }
 
+class UpdateCommentModel(BaseModel):
+    comment_body: Optional[str]
+    user_id: Optional[str]
+    votes: Optional[int]
+
 def ResponseModel(data, message):
     return {
         "data": [data],
