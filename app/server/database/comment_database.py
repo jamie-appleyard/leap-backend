@@ -17,6 +17,18 @@ def comment_helper(comment):
         'votes': int(comment['votes'])
     }
 
+#Fetch all comments
+async def retrieve_comments():
+    comments = []
+    async for comment in comment_col.find():
+        comments.append(comment_helper(comment))
+    return comments
+
+#Fetch comment by ID
+async def retrieve_comment(id : str):
+    comment = await comment_col.find_one({'_id' : ObjectId(id)})
+    if comment:
+        return comment_helper(comment)
 
 async def update_comment(id: str, data: dict):
     if len(data) < 1:
@@ -42,4 +54,3 @@ async def delete_comment(id: str):
     if comment:
         await comment_col.delete_one({'_id': ObjectId(id)})
         return True
-
