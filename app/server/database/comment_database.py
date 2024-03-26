@@ -16,3 +16,15 @@ def comment_helper(comment):
         'user_id': str(comment['user_id']),
         'votes': int(comment['votes'])
     }
+
+async def update_comment(id: str, data: dict):
+    if len(data) < 1:
+        return False
+    comment = await comment_col.find_one({"_id": ObjectId(id)})
+    if comment:
+        updated_comment = await comment_col.update_one(
+            {"_id": ObjectId(id)}, {"$set": data}
+        )
+        if updated_comment:
+            return True
+        return False
