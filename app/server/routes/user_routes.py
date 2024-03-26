@@ -4,7 +4,7 @@ from fastapi import APIRouter, Body
 from fastapi.encoders import jsonable_encoder
 
 #Importing the DB functions we made in database.py
-from server.database.user_database import (
+from ..database.user_database import (
     add_user,
     retrieve_user,
     retrieve_users,
@@ -13,7 +13,7 @@ from server.database.user_database import (
 )
 
 #Importing the Models we made in models/user.py
-from server.models.user_models import (
+from ..models.user_models import (
     ErrorResponseModel,
     ResponseModel,
     UserSchema,
@@ -54,7 +54,7 @@ async def delete_user_data(id: str):
     return ErrorResponseModel('An error occurred', 404, 'Student with ID {} does not exist'.format(id))
 
 #Update user by ID
-@router.patch('/{id}')
+@router.put('/{id}')
 async def update_user_data(id: str, req: UpdateUserModel = Body(...)):
     req = {k:v for k,v in req.dict().items() if v is not None}
     print(req)

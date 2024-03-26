@@ -4,7 +4,7 @@ from fastapi import APIRouter, Body
 from fastapi.encoders import jsonable_encoder
 
 #Importing the DB functions we made in database.py
-from server.database.post_database import (
+from ..database.post_database import (
     add_post,
     retrieve_post,
     retrieve_posts,
@@ -13,7 +13,7 @@ from server.database.post_database import (
 )
 
 #Importing the Models we made in models/user.py
-from server.models.post_models import (
+from ..models.post_models import (
     ErrorResponseModel,
     ResponseModel,
     PostSchema,
@@ -54,7 +54,7 @@ async def delete_post_data(id: str):
     return ErrorResponseModel('An error occurred', 404, 'Post with ID {} does not exist'.format(id))
 
 #Update post by ID
-@router.patch('/{id}')
+@router.put('/{id}')
 async def update_post_data(id: str, req: UpdatePostModel = Body(...)):
     req = {k:v for k,v in req.dict().items() if v is not None} # Pardon? - need this explained
     updated_post = await update_post(id, req)

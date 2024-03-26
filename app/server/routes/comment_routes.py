@@ -2,7 +2,7 @@ from fastapi import APIRouter, Body
 
 from fastapi.encoders import jsonable_encoder
 
-from server.database.comment_database import (
+from ..database.comment_database import (
     retrieve_comments,
     retrieve_comment,
     update_comment,
@@ -10,7 +10,7 @@ from server.database.comment_database import (
     delete_comment
 ) 
 
-from server.models.comment_models import (
+from ..models.comment_models import (
     ErrorResponseModel,
     ResponseModel,
     UpdateCommentModel,

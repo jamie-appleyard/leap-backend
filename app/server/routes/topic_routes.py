@@ -3,7 +3,7 @@ from fastapi import APIRouter, Body
 
 from fastapi.encoders import jsonable_encoder
 
-from server.database.topic_database import (
+from ..database.topic_database import (
     retrieve_topic,
     retrieve_topics,
     add_topic,
@@ -11,7 +11,7 @@ from server.database.topic_database import (
     delete_topic
 )
 
-from server.models.topic_models import (
+from ..models.topic_models import (
     ResponseModel,
     ErrorResponseModel,
     TopicSchema,
