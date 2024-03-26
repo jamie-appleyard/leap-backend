@@ -18,6 +18,12 @@ def topic_helper(topic):
         'pond_id': str(topic['pond_id'])
     }
 
+async def retrieve_topics():
+    topics = []
+    async for topic in topic_col.find():
+        topics.append(topic_helper(topic))
+    return topic
+
 async def retrieve_topic(id : str):
     topic = await topic_col.find_one({'_id' : ObjectId(id)})
     if topic:
@@ -39,3 +45,9 @@ async def update_topic(id: str, data: dict):
         if updated_topic:
             return True
         return False
+    
+async def delete_topic(id: str):
+    topic = await topic_col.find_one({"_id": ObjectId(id)})
+    if topic:
+        await topic_col.delete_one({"_id": ObjectId(id)})
+        return True

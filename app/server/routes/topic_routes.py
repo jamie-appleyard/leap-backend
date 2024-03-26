@@ -5,8 +5,10 @@ from fastapi.encoders import jsonable_encoder
 
 from server.database.topic_database import (
     retrieve_topic,
+    retrieve_topics,
     add_topic,
-    update_topic
+    update_topic,
+    delete_topic
 )
 
 from server.models.topic_models import (
@@ -17,6 +19,13 @@ from server.models.topic_models import (
 )
 
 router = APIRouter()
+
+@router.get('/', response_description='Topics receieved')
+async def get_topics():
+    topics = await retrieve_topics()
+    if topics:
+        return ResponseModel(topics, 'Topics data retrieved successfully')
+    return ResponseModel(topics, 'Returned an empty list')
 
 @router.get('/{id}', response_description='Topic data retrieved successfully')
 async def get_topic_by_id(id):
@@ -44,4 +53,15 @@ async def update_topic_data(id: str, req: UpdateTopicModel = Body(...)):
         "An error occurred",
         404,
         "error updating topic"
+    )
+
+@router.delete("/{id}", response_description="topic data deleted from database")
+async def delete_topic_data(id: str):
+    deleted_topic = await delete_topic(id)
+    if deleted_topic:
+        return ResponseModel(
+            "topic with ID: {} removed".format(id), "topic deleted successfully"
+        )
+    return ErrorResponseModel(
+        "An error occcurred", 404, "topic with id {0} does not exist".format(id)
     )
