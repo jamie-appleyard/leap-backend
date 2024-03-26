@@ -22,7 +22,7 @@ async def retrieve_topics():
     topics = []
     async for topic in topic_col.find():
         topics.append(topic_helper(topic))
-    return topic
+    return topics
 
 async def retrieve_topic(id : str):
     topic = await topic_col.find_one({'_id' : ObjectId(id)})

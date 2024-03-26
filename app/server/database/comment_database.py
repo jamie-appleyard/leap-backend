@@ -16,3 +16,9 @@ def comment_helper(comment):
         'user_id': str(comment['user_id']),
         'votes': int(comment['votes'])
     }
+
+#Add a new comment
+async def add_comment(comment_data : dict):
+    comment = await comment_col.insert_one(comment_data) #also insert_many()
+    new_comment = await comment_col.find_one({'_id' : comment.inserted_id})
+    return comment_helper(new_comment)
