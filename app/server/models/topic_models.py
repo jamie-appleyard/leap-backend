@@ -15,7 +15,7 @@ class TopicSchema(BaseModel):
             'sub_data': []
         }
 
-def ResposeModel(data, message):
+def ResponseModel(data, message):
     return {
         "data": [data],
         "code": 200,
