@@ -16,3 +16,10 @@ def comment_helper(comment):
         'user_id': str(comment['user_id']),
         'votes': int(comment['votes'])
     }
+
+#Delete a comment by id
+async def delete_comment(id: str):
+    comment = await comment_col.find_one({'_id': ObjectId(id)})
+    if comment:
+        await comment_col.delete_one({'_id': ObjectId(id)})
+        return True
