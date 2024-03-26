@@ -1,7 +1,7 @@
 from typing import Optional
 from pydantic import BaseModel, Field
 
-class CommentsSchema(BaseModel):
+class CommentSchema(BaseModel):
     comment_body: str = Field(...)
     user_id: str = Field(...)
     votes: int = Field(...)
