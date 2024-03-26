@@ -27,14 +27,14 @@ def post_helper(post):
 #Functions that interact directly with the database
 
 #Fetch all posts
-async def retrieve_post():
+async def retrieve_posts():
     posts = []
     async for post in post_col.find():
         posts.append(post_helper(post))
     return posts
 
 #Get post by post ID
-async def retrieve_posts(id : str):
+async def retrieve_post(id : str):
     post = await post_col.find_one({'_id' : ObjectId(id)})
     if post:
         return post_helper(post)
