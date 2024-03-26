@@ -12,6 +12,7 @@ comment_col = db['comment']
 
 def comment_helper(comment):
     return {
+        'id' : str(comment['_id']),
         'comment_body': str(comment['comment_body']),
         'user_id': str(comment['user_id']),
         'votes': int(comment['votes'])
