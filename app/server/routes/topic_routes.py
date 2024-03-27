@@ -38,7 +38,9 @@ async def get_topic_by_id(id):
 async def add_topic_data(topic: TopicSchema = Body(...)):
     topic = jsonable_encoder(topic)
     new_topic = await add_topic(topic)
-    return ResponseModel(new_topic, 'Topic added successfully')
+    if new_topic:
+        return ResponseModel(new_topic, 'Topic added successfully')
+    return ErrorResponseModel('An error occurred.', 404, 'topic cannot be posted')
 
 @router.put("/{id}")
 async def update_topic_data(id: str, req: UpdateTopicModel = Body(...)):
@@ -52,7 +54,7 @@ async def update_topic_data(id: str, req: UpdateTopicModel = Body(...)):
     return ErrorResponseModel(
         "An error occurred",
         404,
-        "error updating topic"
+        "error topic does not exist"
     )
 
 @router.delete("/{id}", response_description="topic data deleted from database")
