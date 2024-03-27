@@ -7,19 +7,16 @@ class TopicSchema(BaseModel):
     
     
     # sub_data: dict = Optional[dict]
-
     class Config:
         schema_extra = {
             'topic_name': 'stonemasonry',
             'summary': 'cutting rocks'
         }
-
 class UpdateTopicModel(BaseModel):
     topic_name: Optional[str]
     summary: Optional[str]
     
     # sub_data: dict = Optional[dict]
-
     class Config:
         schema_extra = {
             'topic_name': 'stonemasonry',
