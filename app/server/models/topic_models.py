@@ -11,8 +11,7 @@ class TopicSchema(BaseModel):
     class Config:
         schema_extra = {
             'topic_name': 'stonemasonry',
-            'summary': 'cutting rocks',
-            'sub_data': []
+            'summary': 'cutting rocks'
         }
 
 class UpdateTopicModel(BaseModel):

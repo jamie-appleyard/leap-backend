@@ -11,22 +11,19 @@ class UserSchema(BaseModel):
     class Config:
         scheme_extra = {
             'username': "Bob",
-            'email' : 'japple@japple.com',
-            'profile_picture': 'hello.jpeg',
-            'user_topics' : [],
-            'user_ponds' : []
+            'email' : 'japple@japple.com'
         }
 
 class UpdateUserModel(BaseModel):
     username: Optional[str]
     email: Optional[EmailStr]
 
-def ResponseModel(data, message): #Lift up to parent and import DRY
+def ResponseModel(data, message):
     return {
         "data": [data],
         "code": 200,
         "message": message
     }
 
-def ErrorResponseModel(error, code, message): #Lift up to parent and import DRY
+def ErrorResponseModel(error, code, message):
     return {"error": error, "code": code, "message": message}
