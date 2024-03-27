@@ -32,9 +32,13 @@ async def retrieve_users():
 
 #Get user by user ID
 async def retrieve_user(id : str):
-    user = await users_col.find_one({'_id' : ObjectId(id)})
+    try:
+        user = await users_col.find_one({'_id' : ObjectId(id)})
+    except:
+        user = False
     if user:
         return user_helper(user)
+    return False
     
 #Add a new user
 async def add_user(user_data : dict):
