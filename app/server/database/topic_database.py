@@ -14,8 +14,7 @@ def topic_helper(topic):
     return {
         'id': str(topic['_id']),
         'topic_name': topic['topic_name'],
-        'summary': topic['summary'],
-        'pond_id': str(topic['pond_id'])
+        'summary': topic['summary']
     }
 
 async def retrieve_topics():

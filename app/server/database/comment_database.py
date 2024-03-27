@@ -15,7 +15,8 @@ def comment_helper(comment):
         'id' : str(comment['_id']),
         'comment_body': str(comment['comment_body']),
         'user_id': str(comment['user_id']),
-        'votes': int(comment['votes'])
+        'votes': int(comment['votes']),
+        'post_id': str(comment['post_id'])
     }
 
 #Fetch all comments
