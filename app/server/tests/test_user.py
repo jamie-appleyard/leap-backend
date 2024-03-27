@@ -1,14 +1,22 @@
 from fastapi.testclient import TestClient
 from app.server.app import app
+from seed_test_db import seed_test_data
+import asyncio
 
 client = TestClient(app)
 
+def print_log(log):
+    print('\n', log)
+
+@seed_test_data
 def test_get_users():
     response = client.get('/user')
     assert response.status_code == 200
     assert isinstance(response.json()["data"], list)
-    assert len(response.json()["data"]) == 100
+    assert len(response.json()["data"][0]) == 100
     assert response.json()["message"] == "User data retrieved successfully"
+    for key in response.json()['data'][0][0].keys():
+        assert key in ['id', 'username', 'email']
     
 def test_get_user_by_id():
     user_id = "66040d2344d383be9bd03053"
@@ -84,3 +92,9 @@ def test_update_invalid_user_data():
     response = client.put('/user/invalid_user_id', json=invalid_user_data)
     assert response.status_code == 422
     assert "detail" in response.json()
+    
+
+def test_users_404():
+    response = client.get('/userrs')
+    print_log(response)
+    assert response.status_code == 404

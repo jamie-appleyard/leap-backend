@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 class CommentSchema(BaseModel):
     comment_body: str = Field(...)
     user_id: str = Field(...)
+    post_id: str = Field(...)
     votes: int = Field(...)
 
     class Config:
@@ -16,6 +17,7 @@ class CommentSchema(BaseModel):
 class UpdateCommentModel(BaseModel):
     comment_body: Optional[str]
     user_id: Optional[str]
+    post_id: Optional[str]
     votes: Optional[int]
 
 def ResponseModel(data, message):

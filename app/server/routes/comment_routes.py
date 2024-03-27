@@ -20,7 +20,7 @@ from ..models.comment_models import (
 router = APIRouter()
 
 #Get all comments
-@router.get('/', response_description='Users recieved')
+@router.get('/', response_description='Comments recieved')
 async def get_comments():
     comments = await retrieve_comments()
     if comments:
@@ -28,7 +28,7 @@ async def get_comments():
     return ResponseModel(comments, 'Returned an empty list')
 
 #Get comment by ID
-@router.get('/{id}', response_description='Topic data retrieved successfully')
+@router.get('/{id}', response_description='Comment data retrieved successfully')
 async def get_comment_by_id(id):
     comment = await retrieve_comment(id)
     if comment:
