@@ -42,8 +42,10 @@ async def get_post_by_id(id):
 @router.post('/', response_description='Post data added into the database') 
 async def add_post_data(post: PostSchema = Body(...)):
     post = jsonable_encoder(post)
-    new_post = await add_post(post)
-    return ResponseModel(new_post, 'Post added successfully')
+    if post:
+        new_post = await add_post(post)
+        return ResponseModel(new_post, 'Post added successfully')
+    return ErrorResponseModel('An error occurred.', 400, "Post does not meet requirements")
 
 #Delete post by ID
 @router.delete('/{id}')
@@ -56,7 +58,7 @@ async def delete_post_data(id: str):
 #Update post by ID
 @router.put('/{id}')
 async def update_post_data(id: str, req: UpdatePostModel = Body(...)):
-    req = {k:v for k,v in req.dict().items() if v is not None} # Pardon? - need this explained
+    req = {k:v for k,v in req.model_dump().items() if v is not None} 
     updated_post = await update_post(id, req)
     if updated_post:
         return ResponseModel('Post with ID {} updated successfully'.format(id), 'Post updated successfully')
