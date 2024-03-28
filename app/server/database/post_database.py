@@ -43,6 +43,9 @@ async def retrieve_post(id : str):
     if post:
         return post_helper(post)
     return False
+
+#Get post by topic ID
+
     
 #Add a new post
 async def add_post(post_data : dict):

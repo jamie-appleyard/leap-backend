@@ -3,6 +3,7 @@ from pydantic import BaseModel, EmailStr, Field
 
 class UserSchema(BaseModel):
     username: str = Field(...)
+    password: str = Field(...)
     email: EmailStr = Field(...)
     # profile_picture: str = Optional[str]#How to set as a file field and have a default
     # user_topics: dict = Optional[dict]
@@ -11,11 +12,13 @@ class UserSchema(BaseModel):
     class Config:
         scheme_extra = {
             'username': "Bob",
+            'password': "bobrocks123",
             'email' : 'japple@japple.com'
         }
 
 class UpdateUserModel(BaseModel):
     username: Optional[str]
+    password: Optional[str]
     email: Optional[EmailStr]
 
 def ResponseModel(data, message):

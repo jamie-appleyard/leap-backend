@@ -14,10 +14,10 @@ def user_helper(user): #Could likely test this
     return {
         'id': str(user['_id']),
         'username': user['username'],
+        'password': user['password'],
         'email': user['email'],
         # 'profile_picture': user['profile_picture'], #How to upload images
         # 'user_topics': dict(user['user_topics']),
-        # 'user_ponds': dict(user['user_ponds'])
     }
 
 #ALL CRUD OPERATIONS
