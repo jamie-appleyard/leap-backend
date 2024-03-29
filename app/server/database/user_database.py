@@ -10,11 +10,11 @@ client = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URL)
 db = client['leap-db']
 users_col = db['users']
 
-def user_helper(user): #Could likely test this
+def user_helper(user):
     return {
         'id': str(user['_id']),
         'username': user['username'],
-        'password': user['password'],
+        # 'password': user['password'],
         'email': user['email'],
         # 'profile_picture': user['profile_picture'], #How to upload images
         # 'user_topics': dict(user['user_topics']),

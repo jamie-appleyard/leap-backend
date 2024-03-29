@@ -8,7 +8,6 @@ client = TestClient(app)
 def print_log(log):
     print('\n', log)
 
-@seed_test_data
 def test_get_users():
     response = client.get('/user')
     assert response.status_code == 200
