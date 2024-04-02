@@ -1,7 +1,7 @@
 import motor.motor_asyncio
 from bson.objectid import ObjectId
 from environs import Env
-from utils.cohere_api import sum_gen
+from ..utils.cohere_api import sum_gen
 
 env = Env()
 env.read_env()
