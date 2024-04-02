@@ -184,4 +184,4 @@ def seed_test_data(func):
     return wrapper
 
 #Run the main function
-asyncio.run(main())
+# asyncio.run(main())
