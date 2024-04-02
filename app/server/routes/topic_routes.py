@@ -8,7 +8,8 @@ from ..database.topic_database import (
     retrieve_topics,
     add_topic,
     update_topic,
-    delete_topic
+    delete_topic,
+    generate_topic
 )
 
 from ..models.topic_models import (
@@ -25,7 +26,7 @@ async def get_topics():
     topics = await retrieve_topics()
     if topics:
         return ResponseModel(topics, 'Topics data retrieved successfully')
-    return ResponseModel(topics, 'Returned an empty list')
+    return ResponseModel(topics, 'Returned an empty list') 
 
 @router.get('/{id}', response_description='Topic data retrieved successfully')
 async def get_topic_by_id(id):
@@ -66,4 +67,13 @@ async def delete_topic_data(id: str):
         )
     return ErrorResponseModel(
         "An error occcurred", 404, "topic with id {0} does not exist".format(id)
+    )
+
+@router.post("/{topic_name}", response_description="New topic generated")
+async def generate_new_topic(topic_name: str):
+    new_topic = await generate_topic(topic_name)
+    if new_topic:
+        return ResponseModel(new_topic, 'topic created successfully')
+    return ErrorResponseModel(
+        "An error occurred", 500, 'new topic generation failed.'
     )

@@ -1,6 +1,7 @@
 import motor.motor_asyncio
 from bson.objectid import ObjectId
 from environs import Env
+from utils.cohere_api import sum_gen
 
 env = Env()
 env.read_env()
@@ -54,7 +55,17 @@ async def update_topic(id: str, data: dict):
         if updated_topic:
             return True
     return False
-    
+
+async def generate_topic(topic):
+    topic = topic.title()
+    topic = topic.replace('+', ' ')
+    topic_summary = sum_gen(topic)
+    post_topic = {
+        'topic_name': topic,
+        'summary': topic_summary
+    }
+    new_topic = await add_topic(post_topic)
+    return new_topic
     
 async def delete_topic(id: str):
     try:

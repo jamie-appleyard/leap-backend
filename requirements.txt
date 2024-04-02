@@ -24,3 +24,18 @@ httpx
 
 #Testing library for python
 pytest
+
+#Langchain LLM integration for Cohere
+langchain
+
+#Cohere
+cohere
+
+#Langchain cohere
+langchain-cohere
+
+#Wikipedia
+wikipedia
+
+#FAISS
+faiss-cpu
