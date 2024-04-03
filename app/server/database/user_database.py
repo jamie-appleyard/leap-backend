@@ -14,10 +14,8 @@ def user_helper(user):
     return {
         'id': str(user['_id']),
         'username': user['username'],
-        # 'password': user['password'],
         'email': user['email'],
-        # 'profile_picture': user['profile_picture'], #How to upload images
-        # 'user_topics': dict(user['user_topics']),
+        'user_topics': user['user_topics']
     }
 
 #ALL CRUD OPERATIONS
@@ -60,6 +58,17 @@ async def update_user(id: str, data: dict):
     user = await users_col.find_one({'_id' : ObjectId(id)})
     if user:
         updated_user = await users_col.update_one({'_id' : ObjectId(id)}, {'$set': data})
+        if updated_user:
+            return True
+        return False
+
+async def add_topic_to_user_topics(id: str, new_topic: list):
+    if len(new_topic) < 1:
+        return False
+    user = await users_col.find_one({'_id' : ObjectId(id)})
+    if user:
+        updated_user_topics = {'user_topics' :user['user_topics'] + new_topic}
+        updated_user = await users_col.update_one({'_id' : ObjectId(id)}, {'$set': updated_user_topics})
         if updated_user:
             return True
         return False

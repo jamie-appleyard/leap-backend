@@ -3,6 +3,8 @@ from bson.objectid import ObjectId
 from environs import Env
 import json
 import asyncio
+from cohere_api import sum_gen
+import random
 
 env = Env()
 env.read_env()
@@ -74,9 +76,6 @@ users_json = open('test-data/test_users.json')
 user_data = json.load(users_json)
 users_json.close()
 
-for user in user_data:
-    user['user_topics'] = []
-
 def user_helper(user):
     return {
         'id': str(user['_id']),
@@ -95,6 +94,13 @@ async def get_users():
 topics_json = open('test-data/test_topics.json')
 topics_data = json.load(topics_json)
 topics_json.close()
+
+#CREATE REAL SUMMARIES FOR TOPICS DATA
+topics_data = topics_data[:20]
+for topic in topics_data:
+    topic_name = topic['topic_name']
+    topic['summary'] = sum_gen(topic['topic_name'])
+
 
 def topic_helper(topic):
     return {
@@ -124,10 +130,12 @@ async def add_user_topic_to_posts(post_data):
             users = await get_users()
         if len(topics) == 0:
             topics = await get_topics()
-    for post, user, topic in zip(post_data, users, topics):
-        new_post = post   
-        new_post['user_id'] = user['id']
-        new_post['topic_id'] = topic['id']
+    for post in post_data:
+        new_post = post
+        user_index = random.randint(0, len(users)-1)
+        new_post['user_id'] = users[user_index]['id']
+        topic_index = random.randint(0, len(topics)-1)
+        new_post['topic_id'] = topics[topic_index]['id']
         new_post['type'] = 'post'
         new_post_data.append(new_post)
     return new_post_data
@@ -188,4 +196,4 @@ def seed_test_data(func):
     return wrapper
 
 #Run the main function
-# asyncio.run(main())
+asyncio.run(main())
