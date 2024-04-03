@@ -76,6 +76,9 @@ users_json = open('test-data/test_users.json')
 user_data = json.load(users_json)
 users_json.close()
 
+for user in user_data:
+    user['user_topics'] = []
+    
 def user_helper(user):
     return {
         'id': str(user['_id']),
