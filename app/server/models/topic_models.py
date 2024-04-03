@@ -3,8 +3,7 @@ from pydantic import BaseModel, Field
 
 class TopicSchema(BaseModel):
     topic_name: str = Field(...)
-    summary: str = Field(...)
-    
+    summary: str = Field(...)    
     
     # sub_data: dict = Optional[dict]
     class Config:
