@@ -34,11 +34,15 @@ async def add_books(book_data: dict):
     return book_helper(new_book)
 
 async def retrieve_books_by_topic_id(topic_id: str):
-    try:
+    topic = await topic_col.find_one({'_id': ObjectId(topic_id)})
+    if topic:
         books = await book_col.find_one({'topic_id': topic_id})
-    except:
-        books = False
-    return book_helper(books)
+        if books:
+            return book_helper(books)
+        else:
+            return []
+    else:
+        return False
 
 async def generate_books(topic_id):
     topic = await topic_col.find_one({'_id': ObjectId(topic_id)})

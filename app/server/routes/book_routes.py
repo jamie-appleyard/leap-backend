@@ -25,9 +25,10 @@ async def get_books():
 @router.get('/{topic_id}', response_description='Books received for topic')
 async def get_books_by_topic(topic_id: str):
     books = await retrieve_books_by_topic_id(topic_id)
-    if books:
+    if books or books == []:
         return ResponseModel(books, 'Books data retrieved successfully')
-    return ErrorResponseModel('An error occurred.', 404, "topic doesn't exist/no books")
+    else:
+        return ErrorResponseModel('An error occurred.', 404, "topic ID doesn't exist")
 
 @router.post("/{topic_id}", response_description="New books generated")
 async def generate_new_books(topic_id: str):
