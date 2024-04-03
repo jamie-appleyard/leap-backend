@@ -38,7 +38,7 @@ async def add_topic(topic_data : dict):
         topic = await topic_col.insert_one(topic_data)
     except:
         return False
-    new_topic = await topic_col.find_one({'_id' : topic.inserted_id})
+    new_topic = await topic_col.find_one({'_id' : topic.inserted_id})#unsure about inserted?
     return topic_helper(new_topic)
 
 async def update_topic(id: str, data: dict):

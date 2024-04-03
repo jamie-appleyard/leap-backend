@@ -77,3 +77,4 @@ async def generate_new_topic(topic_name: str):
     return ErrorResponseModel(
         "An error occurred", 500, 'new topic generation failed.'
     )
+    
