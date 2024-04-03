@@ -9,7 +9,8 @@ from ..database.user_database import (
     retrieve_user,
     retrieve_users,
     delete_user,
-    update_user
+    update_user,
+    add_topic_to_user_topics
 )
 
 #Importing the Models we made in models/user.py
@@ -57,8 +58,10 @@ async def delete_user_data(id: str):
 @router.put('/{id}')
 async def update_user_data(id: str, req: UpdateUserModel = Body(...)):
     req = {k:v for k,v in req.dict().items() if v is not None}
-    print(req)
-    updated_user = await update_user(id, req)
+    if 'user_topics' in req.keys():
+        updated_user = await add_topic_to_user_topics(id, req['user_topics'])
+    else:
+        updated_user = await update_user(id, req)
     if updated_user:
         return ResponseModel('User with ID {} updated successfully'.format(id), 'User updated successfully')
     return ErrorResponseModel('An error occurred', 404, 'There was an error updating data for student with ID {}'.format(id))
