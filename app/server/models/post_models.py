@@ -6,8 +6,8 @@ class PostSchema(BaseModel):
     post_body: str = Field(...)
     title: str = Field(...)
     user_id: str = Field(...)
-    votes: int = Field(default=0) # Is this right?
-    post_image: str = Field(...) # Is this right?
+    votes: int = Field(default=0)
+    post_image: str = Field(...)
     type: list = Field(...)
 
     class Config:
