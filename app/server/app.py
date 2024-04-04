@@ -13,7 +13,8 @@ origins = [
     "http://localhost:3000",
     "http://0.0.0.0:8000",
     "http://0.0.0.0:8080",
-    "http://localhost:8080"
+    "http://localhost:8080",
+    "https://leap-1i7mfs9mn-swlhos-projects.vercel.app/"
 ]
 
 app.add_middleware(

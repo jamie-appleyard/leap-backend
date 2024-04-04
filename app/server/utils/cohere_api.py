@@ -39,7 +39,7 @@ def sum_gen(topic):
     retriever = vector.as_retriever()
     retrieval_chain = create_retrieval_chain(retriever, document_chain)
     response = retrieval_chain.invoke({"input": f"""## Instructions \nUsing the included text gathered from the top 10 web searches on a set topic, perform the following steps:
-            \n1. Read through the provided article for relevant information
+            \n1. Read through the provided text for relevant information on {topic}
             \n2. Extract the 3 most important paragraphs from the provided text
             \n3. From the paragraphs extracted in step 2, extract the most important sentences from each paragraph
             \n4. Create a summary from the sentences extracted in step 3 in a flowing high natural language quality text. Between 300 and 500 words long.
