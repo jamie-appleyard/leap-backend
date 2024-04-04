@@ -8,7 +8,7 @@ class PostSchema(BaseModel):
     user_id: str = Field(...)
     votes: int = Field(default=0)
     post_image: str = Field(...)
-    type: list = Field(...)
+    type: str = Field(...)
 
     class Config:
         scheme_extra = {
