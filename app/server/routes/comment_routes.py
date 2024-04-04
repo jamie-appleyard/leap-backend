@@ -7,7 +7,8 @@ from ..database.comment_database import (
     retrieve_comment,
     update_comment,
     add_comment,
-    delete_comment
+    delete_comment,
+    retrieve_comments_by_post_id
 ) 
 
 from ..models.comment_models import (
@@ -34,6 +35,16 @@ async def get_comment_by_id(id):
     if comment:
         return ResponseModel(comment, 'Comment data retrieved successfully')
     return ErrorResponseModel('An error occurred.', 404, 'Comment does not exist')
+
+#Get comments by Post ID
+@router.get('/post/{post_id}', response_description='Comments recieved for post with ID {post_id}')
+async def get_comments_by_post_id(post_id):
+    comments = await retrieve_comments_by_post_id(post_id)
+    if comments or comments == []:
+        return ResponseModel(comments, 'Comments data retrieved successfully')
+    else:
+       ErrorResponseModel('A server error occurred.', 500, 'Internal server error') 
+    
 
 #Update a comment by ID
 @router.put("/{id}")

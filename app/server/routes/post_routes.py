@@ -9,7 +9,8 @@ from ..database.post_database import (
     retrieve_post,
     retrieve_posts,
     delete_post,
-    update_post
+    update_post,
+    retrieve_post_by_topic_id
 )
 
 #Importing the Models we made in models/user.py
@@ -37,6 +38,15 @@ async def get_post_by_id(id):
     if post:
         return ResponseModel(post, 'Post data retrieved successfully')
     return ErrorResponseModel('An error occurred.', 404, "Post doesn't exist")
+
+#Get post by topic ID
+@router.get('/topic/{topic_id}', response_description='Post collected by topid ID')
+async def get_post_by_topic_id(topic_id):
+    posts = await retrieve_post_by_topic_id(topic_id)
+    if posts or posts == []:
+        return ResponseModel(posts, f'Posts retreived for topic with topic ID {topic_id}')
+    else:
+       ErrorResponseModel('A server error occurred.', 500, 'Internal server error')
 
 #Add a new post
 @router.post('/', response_description='Post data added into the database') 

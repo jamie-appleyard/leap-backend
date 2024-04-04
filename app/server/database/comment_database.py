@@ -31,6 +31,16 @@ async def retrieve_comment(id : str):
     comment = await comment_col.find_one({'_id' : ObjectId(id)})
     if comment:
         return comment_helper(comment)
+    
+#Feth comments by post ID
+async def retrieve_comments_by_post_id(post_id: str):
+    res_comments = []
+    async for comment in comment_col.find({'post_id' : post_id}):
+        res_comments.append(comment_helper(comment))
+    if res_comments:
+        return res_comments
+    else:
+        return []
 
 async def update_comment(id: str, data: dict):
     if len(data) < 1:

@@ -45,8 +45,15 @@ async def retrieve_post(id : str):
     return False
 
 #Get post by topic ID
+async def retrieve_post_by_topic_id(topic_id : str):
+    res_posts = []
+    async for post in post_col.find({'topic_id' : topic_id}):
+        res_posts.append(post_helper(post))
+    if res_posts:
+        return res_posts
+    else:
+        return []
 
-    
 #Add a new post
 async def add_post(post_data : dict):
     try:
