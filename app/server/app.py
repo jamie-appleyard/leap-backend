@@ -15,7 +15,7 @@ origins = [
     "http://0.0.0.0:8080",
     "http://localhost:8080",
     "https://leap-1i7mfs9mn-swlhos-projects.vercel.app/",
-    "https://leap-lilac.vercel.app/"
+    "https://leap-lilac.vercel.app/dashboard"
 ]
 
 app.add_middleware(
