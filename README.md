@@ -38,10 +38,3 @@ source env/bin/activate
 ```
 pip install -r requirements.txt
 ```
-
-<what next?>
-4. Seed the local database:
-
-```
-npm run seed
-```
